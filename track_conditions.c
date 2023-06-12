@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 13:04:27 by adardour          #+#    #+#             */
-/*   Updated: 2023/06/10 13:59:08 by adardour         ###   ########.fr       */
+/*   Updated: 2023/06/10 15:22:32 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,4 @@ void	track_conditions(t_philo_node *head, int number_of_philo)
 		current = current->next;
 		usleep(100);
 	}
-	current = head;
 }

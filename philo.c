@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:11:14 by adardour          #+#    #+#             */
-/*   Updated: 2023/06/10 13:54:32 by adardour         ###   ########.fr       */
+/*   Updated: 2023/06/10 23:01:02 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ void	*tasks(void *data)
 		print_task("is eating", current_time() - philo->start_time, philo);
 		my_own_usleep22(philo->data.time_to_eat);
 		protect_eat(philo);
-		pthread_mutex_unlock(&philo->mutex);
-		pthread_mutex_unlock(&philo->next->mutex);
 		pthread_mutex_lock(&philo->last_meal_mutex);
 		philo->last_meal = current_time() - philo->start_time;
 		pthread_mutex_unlock(&philo->last_meal_mutex);
+		pthread_mutex_unlock(&philo->mutex);
+		pthread_mutex_unlock(&philo->next->mutex);
 		print_task("is sleeping", current_time() - philo->start_time, philo);
 		my_own_usleep22(philo->data.time_to_sleep);
 		print_task("is thinking", current_time() - philo->start_time, philo);
@@ -57,17 +57,17 @@ void	*tasks(void *data)
 	return (NULL);
 }
 
-void	start_simulation(t_philo_node *head, pthread_t *threads,
+void	to_do(t_philo_node *head, pthread_t *threads,
 		int numbr_of_philo)
 {
 	t_philo_node	*current;
 	int				i;
 	long long		start_time;
 
-	i = 0;
-	start_time = current_time();
+	i = -1;
 	current = head;
-	while (i < numbr_of_philo)
+	start_time = current_time();
+	while (++i < numbr_of_philo)
 	{
 		current->start_time = start_time;
 		if (pthread_create(&threads[i], NULL, tasks, current) == -1)
@@ -80,9 +80,8 @@ void	start_simulation(t_philo_node *head, pthread_t *threads,
 			printf("Error deatch\n");
 			break ;
 		}
-		usleep(100);
 		current = current->next;
-		i++;
+		usleep(100);
 	}
 	track_conditions(head, numbr_of_philo);
 }
