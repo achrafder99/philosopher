@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:11:14 by adardour          #+#    #+#             */
-/*   Updated: 2023/06/10 23:01:02 by adardour         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:20:18 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ void	*tasks(void *data)
 		print_task("has taken a fork", current_time() - philo->start_time,
 			philo);
 		print_task("is eating", current_time() - philo->start_time, philo);
-		my_own_usleep22(philo->data.time_to_eat);
-		protect_eat(philo);
 		pthread_mutex_lock(&philo->last_meal_mutex);
 		philo->last_meal = current_time() - philo->start_time;
 		pthread_mutex_unlock(&philo->last_meal_mutex);
+		my_own_usleep22(philo->data.time_to_eat);
+		protect_eat(philo);
 		pthread_mutex_unlock(&philo->mutex);
 		pthread_mutex_unlock(&philo->next->mutex);
 		print_task("is sleeping", current_time() - philo->start_time, philo);

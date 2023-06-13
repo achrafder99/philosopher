@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:12:01 by adardour          #+#    #+#             */
-/*   Updated: 2023/06/12 17:00:09 by adardour         ###   ########.fr       */
+/*   Updated: 2023/06/13 18:18:43 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
+# include <pthread.h>
 
 typedef struct t_count
 {
@@ -43,6 +44,8 @@ typedef struct t_philo_node
 {
 	long long			start_time;
 	sem_t				*fork;
+	sem_t				*print;
+	sem_t				*last_meal_sem;
 	int					eat;
 	int					id;
 	pid_t				pid;

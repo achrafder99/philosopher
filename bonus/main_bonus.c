@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 18:17:43 by adardour          #+#    #+#             */
-/*   Updated: 2023/06/12 17:28:52 by adardour         ###   ########.fr       */
+/*   Updated: 2023/06/13 18:33:35 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,18 @@ long long	current_time(void)
 	return (milliseconds);
 }
 
-void	my_own_usleep22(long long time_stamps)
+void	print_task(char *message, long long time_stamps, t_philo_node *philo)
+{
+	sem_unlink("/print");
+	philo->print = sem_open("/print", O_CREAT | O_EXCL | O_RDWR, 0666, 1);
+	sem_wait(philo->print);
+	printf("%lld %d %s\n", time_stamps, philo->id, message);
+	sem_post(philo->print);
+	sem_close(philo->print);
+	sem_unlink("/print");
+}
+
+void	my_own_usleep22(long long time_stamps, t_philo_node *philo)
 {
 	long long	current;
 
@@ -39,22 +50,16 @@ void	run_routine(t_philo_node *current_philo)
 	while (1)
 	{
 		sem_wait(current_philo->fork);
-		printf("%lld %d has taken a fork\n", current_time() - time,
-			current_philo->id);
+		print_task("has taken a fork", current_time() - time, current_philo);
 		sem_wait(current_philo->fork);
-		printf("%lld %d has taken a fork\n", current_time() - time,
-			current_philo->id);
-		printf("%lld %d is eating \n", current_time() - time,
-			current_philo->id);
-		my_own_usleep22(current_philo->data.number_of_eat);
-		current_philo->last_meal = current_time() - current_philo->start_time;
+		print_task("has taken a fork", current_time() - time, current_philo);
+		print_task("is eating", current_time() - time, current_philo);
+		my_own_usleep22(current_philo->data.time_to_eat, current_philo);
 		sem_post(current_philo->fork);
 		sem_post(current_philo->fork);
-		printf("%lld %d is sleeping \n", current_time() - time,
-			current_philo->id);
-		my_own_usleep22(current_philo->data.time_to_sleep);
-		printf("%lld %d is thinking \n", current_time() - time,
-			current_philo->id);
+		print_task("is sleeping", current_time() - time, current_philo);
+		my_own_usleep22(current_philo->data.time_to_sleep, current_philo);
+		print_task("is thinking", current_time() - time, current_philo);
 	}
 }
 
@@ -65,6 +70,7 @@ void	to_do_bonus(t_philo_node *head, int number_of_philo)
 	long long		start_time;
 	int				i;
 
+	sem_unlink("/semaphore");
 	inital_semaphore = sem_open("/semaphore", O_CREAT | O_EXCL | O_RDWR, 0666,
 			number_of_philo);
 	if (!inital_semaphore)
@@ -79,7 +85,6 @@ void	to_do_bonus(t_philo_node *head, int number_of_philo)
 	{
 		philo->fork = inital_semaphore;
 		philo->pid = fork();
-		philo->start_time = start_time;
 		if (philo->pid == -1)
 		{
 			printf("Fork error\n");
@@ -87,13 +92,13 @@ void	to_do_bonus(t_philo_node *head, int number_of_philo)
 		}
 		if (philo->pid == 0)
 		{
+			usleep(100);
 			run_routine(philo);
 		}
-		philo = philo->next;
 		i++;
+		philo = philo->next;
 	}
 	wait(NULL);
 	sem_close(inital_semaphore);
-	unlink("/semaphore");
+	sem_unlink("/semaphore");
 }
-
