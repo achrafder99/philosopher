@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_own_usleep.c                                    :+:      :+:    :+:   */
+/*   kill_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/08 22:43:55 by adardour          #+#    #+#             */
-/*   Updated: 2023/06/14 17:08:50 by adardour         ###   ########.fr       */
+/*   Created: 2023/06/15 02:11:04 by adardour          #+#    #+#             */
+/*   Updated: 2023/06/15 02:11:17 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "./philo_bonus.h"
 
-void	my_own_usleep22(long long time_stamps)
+void	kill_all(t_philo_node *head)
 {
-	long long	current;
+	t_philo_node	*philo;
 
-	current = current_time();
-	while (current_time() - current < time_stamps)
-		usleep(50);
+	philo = head;
+	while (philo)
+	{
+		kill(philo->pid, SIGKILL);
+		philo = philo->next;
+	}
 }

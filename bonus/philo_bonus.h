@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:12:01 by adardour          #+#    #+#             */
-/*   Updated: 2023/06/13 18:18:43 by adardour         ###   ########.fr       */
+/*   Updated: 2023/06/15 02:27:36 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 # define PHILO_BONUS_H
 
 # include <fcntl.h>
+# include <pthread.h>
 # include <semaphore.h>
+# include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-# include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
-# include <pthread.h>
 
 typedef struct t_count
 {
@@ -50,7 +50,8 @@ typedef struct t_philo_node
 	int					id;
 	pid_t				pid;
 	t_data				data;
-	long	long		last_meal;
+	long long			last_meal;
+	int					alive;
 	struct t_philo_node	*next;
 }						t_philo_node;
 
@@ -62,5 +63,15 @@ void					init_args(t_data *data, char **args, int c);
 t_philo_node			*init_nodes(int number_philo, t_data *data);
 void					to_do_bonus(t_philo_node *head, int number_of_philo);
 int						main(int c, char **argv);
+long long				current_time(void);
+void					my_own_usleep22(long long time_stamps, \
+						t_philo_node *current_philo);
+int						check_death(t_philo_node *philo);
+void					kill_all(t_philo_node *head);
+void					close_and_kill(t_philo_node *head, \
+						sem_t *inital_semaphore,
+							sem_t *print);
+void					int_semaphores(sem_t *inital_semaphore, \
+							sem_t *print, int number_of_philo);
 
 #endif

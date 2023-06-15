@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_own_usleep.c                                    :+:      :+:    :+:   */
+/*   currenttime.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/08 22:43:55 by adardour          #+#    #+#             */
-/*   Updated: 2023/06/14 17:08:50 by adardour         ###   ########.fr       */
+/*   Created: 2023/06/08 22:43:05 by adardour          #+#    #+#             */
+/*   Updated: 2023/06/15 02:03:37 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "../philo_bonus.h"
 
-void	my_own_usleep22(long long time_stamps)
+long long	current_time(void)
 {
-	long long	current;
+	long long		milliseconds;
+	struct timeval	current_time;
 
-	current = current_time();
-	while (current_time() - current < time_stamps)
-		usleep(50);
+	gettimeofday(&current_time, NULL);
+	milliseconds = (current_time.tv_sec * 1000) + (current_time.tv_usec / 1000);
+	return (milliseconds);
 }

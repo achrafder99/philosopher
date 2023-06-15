@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_own_usleep.c                                    :+:      :+:    :+:   */
+/*   init_semaphores.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/08 22:43:55 by adardour          #+#    #+#             */
-/*   Updated: 2023/06/14 17:08:50 by adardour         ###   ########.fr       */
+/*   Created: 2023/06/15 02:22:05 by adardour          #+#    #+#             */
+/*   Updated: 2023/06/15 02:27:50 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "./philo_bonus.h"
 
-void	my_own_usleep22(long long time_stamps)
+void	int_semaphores(sem_t *inital_semaphore, sem_t *print,
+		int number_of_philo)
 {
-	long long	current;
-
-	current = current_time();
-	while (current_time() - current < time_stamps)
-		usleep(50);
+	sem_unlink("/semaphore");
+	sem_unlink("/print");
+	inital_semaphore = sem_open("/semaphore", O_CREAT | O_EXCL | O_RDWR, 0666,
+			number_of_philo);
+	print = sem_open("/print", O_CREAT | O_EXCL | O_RDWR, 0666, 1);
+	if (!inital_semaphore)
+	{
+		printf("Semaphore error\n");
+		exit(EXIT_FAILURE);
+	}
 }

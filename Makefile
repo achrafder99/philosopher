@@ -6,7 +6,7 @@
 #    By: adardour <adardour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/28 19:09:59 by adardour          #+#    #+#              #
-#    Updated: 2023/06/12 16:02:58 by adardour         ###   ########.fr        #
+#    Updated: 2023/06/15 02:25:23 by adardour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ SRCS = philo.c ./utils/ft_atoi.c ./utils/ft_isdigit.c ./init_struct.c ./main.c \
 	./track_conditions.c ./inits.c
 
 BONUS = ./bonus/main.c ./bonus/philo_bonus.c ./bonus/utils/ft_atoi.c ./bonus/utils/ft_isdigit.c \
-./bonus/parse.c ./bonus/main_bonus.c
+./bonus/parse.c ./bonus/main_bonus.c ./bonus/times/currenttime.c ./bonus/times/my_own_usleep.c \
+./bonus/kill_all.c ./bonus/close_and_kill.c ./bonus/init_semaphores.c
 
 CC = cc
 RM = rm -rf
