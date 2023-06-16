@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 18:17:43 by adardour          #+#    #+#             */
-/*   Updated: 2023/06/16 13:59:42 by adardour         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:37:22 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,29 +88,24 @@ void	to_do_bonus(t_philo_node *head, int number_of_philo)
 	sem_t			*print;
 	sem_t			*print_die;
 	sem_t			*eat_sem;
-	t_philo_node	*philo;
 	long long		start_time;
-	int				i;
 
 	sem_unlink("/eat_sem");
-	init_semaphore(&inital_semaphore, &print, number_of_philo, &print_die);
+	init_semaphore(&forks, &print, number_of_philo, &print_die);
 	eat_sem = sem_open("/semaphore", O_CREAT | O_EXCL | O_RDWR, 0666,
 			1);
-	philo = head;
-	i = 0;
 	start_time = current_time();
-	while (i < number_of_philo)
+	while (head)
 	{
-		philo->start_time = start_time;
-		philo->print = print;
-		philo->print_die = print_die;
-		philo->eat_sem = eat_sem;
-		philo->pid = fork();
-		just_run(philo, inital_semaphore);
-		philo = philo->next;
-		i++;
+		head->start_time = start_time;
+		head->print = print;
+		head->print_die = print_die;
+		head->eat_sem = eat_sem;
+		head->pid = fork();
+		just_run(head, forks);
+		head = head->next;
 	}
 	waitpid(-1, NULL, 0);
-	close_and_kill(head, inital_semaphore, print, print_die);
+	close_and_kill(head, forks, print, print_die);
 	sem_unlink("/eat_sem");
 }

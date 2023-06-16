@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:12:01 by adardour          #+#    #+#             */
-/*   Updated: 2023/06/10 22:45:05 by adardour         ###   ########.fr       */
+/*   Updated: 2023/06/16 16:53:02 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct t_data
 
 typedef struct t_philo_node
 {
+	int					die;
 	int					eat;
 	long long			start_time;
 	int					id;

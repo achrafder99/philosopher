@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 23:32:38 by adardour          #+#    #+#             */
-/*   Updated: 2023/06/10 15:19:52 by adardour         ###   ########.fr       */
+/*   Updated: 2023/06/16 16:53:41 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	create_node(int data, t_philo_node **head, t_data *data_node)
 	node->data = *data_node;
 	node->start_time = 0;
 	node->eat = 0;
+	node->die = 0;
 	if (*head == NULL)
 	{
 		*head = node;

@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:01:19 by adardour          #+#    #+#             */
-/*   Updated: 2023/06/15 01:59:36 by adardour         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:37:01 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int c, char **argv)
 {
 	t_data			*data;
 	t_philo_node	*head;
+	t_philo_node	*temp;
 
 	data = malloc(sizeof(t_data));
 	if (!data)
@@ -32,6 +33,8 @@ int	main(int c, char **argv)
 	}
 	init_args(data, argv, c);
 	head = init_nodes(data->number_of_philosophers, data);
-	to_do_bonus(head, data->number_of_philosophers);
+	temp = head;
+	to_do_bonus(temp, data->number_of_philosophers);
+	kill_all(head);
 	free(data);
 }

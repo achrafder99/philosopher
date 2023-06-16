@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 02:19:39 by adardour          #+#    #+#             */
-/*   Updated: 2023/06/16 12:15:58 by adardour         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:36:09 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,4 @@ void	close_and_kill(t_philo_node *head, sem_t *inital_semaphore,
 	sem_close(print);
 	sem_unlink("/print");
 	sem_close(print_die);
-	kill_all(head);
 }

@@ -6,7 +6,7 @@
 #    By: adardour <adardour@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/28 19:09:59 by adardour          #+#    #+#              #
-#    Updated: 2023/06/15 21:26:09 by adardour         ###   ########.fr        #
+#    Updated: 2023/06/16 16:42:20 by adardour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ BONUS = ./bonus/main.c ./bonus/philo_bonus.c ./bonus/utils/ft_atoi.c ./bonus/uti
 ./bonus/parse.c ./bonus/main_bonus.c ./bonus/times/currenttime.c ./bonus/times/my_own_usleep.c \
 ./bonus/kill_all.c ./bonus/close_and_kill.c ./bonus/init_semaphores.c
 
-CC = cc
+CC = cc 
 RM = rm -rf
 CFLAGS = -Wall -Wextra -Werror
 

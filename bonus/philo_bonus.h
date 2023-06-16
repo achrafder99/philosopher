@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:12:01 by adardour          #+#    #+#             */
-/*   Updated: 2023/06/16 13:59:49 by adardour         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:20:41 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@
 # include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
-
-typedef struct t_semaphores
-{
-	
-}	t_semaphores;
 
 typedef struct t_count
 {

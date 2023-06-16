@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:11:14 by adardour          #+#    #+#             */
-/*   Updated: 2023/06/16 00:13:48 by adardour         ###   ########.fr       */
+/*   Updated: 2023/06/16 18:50:47 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	to_do(t_philo_node *head, pthread_t *threads,
 	while (++i < numbr_of_philo)
 	{
 		current->start_time = start_time;
+		usleep(100);
 		if (pthread_create(&threads[i], NULL, tasks, current) == -1)
 		{
 			printf("Error threads\n");
@@ -81,7 +82,6 @@ void	to_do(t_philo_node *head, pthread_t *threads,
 			break ;
 		}
 		current = current->next;
-		usleep(100);
 	}
 	track_conditions(head, numbr_of_philo);
 }

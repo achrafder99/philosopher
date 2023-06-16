@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 13:04:27 by adardour          #+#    #+#             */
-/*   Updated: 2023/06/10 15:22:32 by adardour         ###   ########.fr       */
+/*   Updated: 2023/06/16 16:53:13 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	check_death(t_philo_node *philo)
 	current = current_time() - philo->start_time;
 	if (current - last_meal >= philo->data.time_to_die)
 	{
+		philo->die = 1;
 		print_task("died", current - last_meal, philo);
 		return (1);
 	}
