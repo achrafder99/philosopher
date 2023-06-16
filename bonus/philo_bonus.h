@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 19:12:01 by adardour          #+#    #+#             */
-/*   Updated: 2023/06/15 02:27:36 by adardour         ###   ########.fr       */
+/*   Updated: 2023/06/16 13:59:49 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@
 # include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
+
+typedef struct t_semaphores
+{
+	
+}	t_semaphores;
 
 typedef struct t_count
 {
@@ -42,9 +47,12 @@ typedef struct t_data
 
 typedef struct t_philo_node
 {
+	int					die;
 	long long			start_time;
 	sem_t				*fork;
+	sem_t				*eat_sem;
 	sem_t				*print;
+	sem_t				*print_die;
 	sem_t				*last_meal_sem;
 	int					eat;
 	int					id;
@@ -65,13 +73,13 @@ void					to_do_bonus(t_philo_node *head, int number_of_philo);
 int						main(int c, char **argv);
 long long				current_time(void);
 void					my_own_usleep22(long long time_stamps, \
-						t_philo_node *current_philo);
+						t_philo_node *current_philo, int eat);
 int						check_death(t_philo_node *philo);
 void					kill_all(t_philo_node *head);
 void					close_and_kill(t_philo_node *head, \
 						sem_t *inital_semaphore,
-							sem_t *print);
-void					int_semaphores(sem_t *inital_semaphore, \
-							sem_t *print, int number_of_philo);
+							sem_t *print, sem_t *print_die);
+void					init_semaphore(sem_t **inital_semaphore, sem_t **print,
+							int number_of_philo, sem_t **print_die);
 
 #endif

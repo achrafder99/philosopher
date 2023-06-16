@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 23:37:03 by adardour          #+#    #+#             */
-/*   Updated: 2023/06/10 22:58:28 by adardour         ###   ########.fr       */
+/*   Updated: 2023/06/15 18:45:46 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	parse_args(char **args)
 		j = 0;
 		while (args[i][j] != '\0')
 		{
+			if (args[i][0] == '+')
+				j++;
 			if (!ft_isdigit(args[i][j]))
 				return (0);
 			j++;
@@ -65,18 +67,17 @@ int	main(int c, char **argv)
 		return (1);
 	if (c <= 4 || c > 6 || !parse_args(argv))
 	{
-		write(2, "Error Parsing\n", 15);
-		return (1);
+		free(data);
+		return (write(2, "Error Parsing\n", 15), 1);
 	}
 	if (ft_atoi(argv[1]) == 0)
-	{
-		printf("One or more philosophers sit at a round table.\n");
-		return (0);
-	}
+		return (printf("One or more philosophers sit at a round table.\n"), 1);
 	init_args(data, argv, c);
 	init_philo(&threads, data->number_of_philosophers);
 	head = create_structs_for_philo(data->number_of_philosophers, data);
 	initialize_mutexes(head, data->number_of_philosophers);
 	to_do(head, threads, data->number_of_philosophers);
 	free(data);
+	free(threads);
+	destroy_mutexes(data->number_of_philosophers, head);
 }

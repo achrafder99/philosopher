@@ -6,7 +6,7 @@
 /*   By: adardour <adardour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 17:48:49 by adardour          #+#    #+#             */
-/*   Updated: 2023/06/12 15:39:48 by adardour         ###   ########.fr       */
+/*   Updated: 2023/06/15 21:25:59 by adardour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 t_philo_node	*ft_lstnew(t_data *data, int id)
 {
 	t_philo_node	*new_tlist;
-	char			*name_semaphore;
-	char			*identifier;
 
 	new_tlist = NULL;
 	new_tlist = (t_philo_node *)malloc(sizeof(t_philo_node));
